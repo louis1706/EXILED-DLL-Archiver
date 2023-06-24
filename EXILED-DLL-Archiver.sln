@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EXILED-DLL-Archiver", "EXILED-DLL-Archiver\EXILED-DLL-Archiver.csproj", "{79A3DF2D-5E6A-4893-B82F-66593032F7C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EXILED-DLL-Archiver", "EXILED-DLL-Archiver\EXILED-DLL-Archiver.csproj", "{57144FFC-078C-486B-B0D6-CC34DEA407E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{79A3DF2D-5E6A-4893-B82F-66593032F7C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79A3DF2D-5E6A-4893-B82F-66593032F7C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79A3DF2D-5E6A-4893-B82F-66593032F7C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79A3DF2D-5E6A-4893-B82F-66593032F7C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57144FFC-078C-486B-B0D6-CC34DEA407E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57144FFC-078C-486B-B0D6-CC34DEA407E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57144FFC-078C-486B-B0D6-CC34DEA407E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57144FFC-078C-486B-B0D6-CC34DEA407E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {98B923AC-F01D-4915-8CC5-8D8A6F3BCE70}
+		SolutionGuid = {658C4C78-984D-4E4D-8E85-68A8EFA138D5}
 	EndGlobalSection
 EndGlobal

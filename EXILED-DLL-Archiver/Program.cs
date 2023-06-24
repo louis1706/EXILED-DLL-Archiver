@@ -22,10 +22,7 @@ namespace EXILED_DLL_Archiver
             string exiled_plugins_path = Path.Combine(path, "EXILED", "Plugins");
             string exiled_plugins_deps_path = Path.Combine(exiled_plugins_path, "dependencies");
             string nw_plugin_path = Path.Combine(path, "SCP Secret Laboratory", "PluginAPI", "plugins", "global");
-            string nw_plugin_deps_path = Path.Combine(nw_plugin_path,"dependencies");
-
-            Directory.CreateDirectory(exiled_plugins_deps_path);
-            Directory.CreateDirectory(nw_plugin_deps_path);
+            string nw_plugin_deps_path = Path.Combine(nw_plugin_path, "dependencies");
 
             List<string> plugins = new List<string> { "Exiled.CreditTags", "Exiled.CustomItems", "Exiled.CustomRoles", "Exiled.Events", "Exiled.Permissions", "Exiled.Updater" };
             List<string> pluginsDep = new List<string> { "0Harmony", "Exiled.API", "SemanticVersioning", "Mono.Posix" };
@@ -33,41 +30,53 @@ namespace EXILED_DLL_Archiver
 
             try
             {
-                foreach (string str in plugins)
+                Directory.CreateDirectory(exiled_plugins_deps_path);
+                Directory.CreateDirectory(nw_plugin_deps_path);
+
+                try
                 {
-                    fileName = Path.Combine(path, str + ".dll");
-                    destFile = Path.Combine(exiled_plugins_path, str + ".dll");
-                    File.Copy(fileName, destFile, true);
+                    foreach (string str in plugins)
+                    {
+                        fileName = Path.Combine(path, str + ".dll");
+                        destFile = Path.Combine(exiled_plugins_path, str + ".dll");
+                        File.Copy(fileName, destFile, true);
+                    }
+
+                    foreach (string str in pluginsDep)
+                    {
+                        fileName = Path.Combine(path, str + ".dll");
+                        destFile = Path.Combine(exiled_plugins_deps_path, str + ".dll");
+                        File.Copy(fileName, destFile, true);
+                    }
+
+                    foreach (string str in nwDep)
+                    {
+                        fileName = Path.Combine(path, str + ".dll");
+                        destFile = Path.Combine(nw_plugin_deps_path, str + ".dll");
+                        File.Copy(fileName, destFile, true);
+                    }
+
+                    File.Copy(Path.Combine(path, "Exiled.Loader.dll"), Path.Combine(nw_plugin_path, "Exiled.Loader.dll"), true);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("missing dll: " + e);
+                    Console.ReadLine();
                 }
 
-                foreach (string str in pluginsDep)
-                {
-                    fileName = Path.Combine(path, str + ".dll");
-                    destFile = Path.Combine(exiled_plugins_deps_path, str + ".dll");
-                    File.Copy(fileName, destFile, true);
-                }
+                CreateTarGZ(Path.Combine(path, "Exiled.tar.gz"), path);
 
-                foreach (string str in nwDep)
-                {
-                    fileName = Path.Combine(path, str + ".dll");
-                    destFile = Path.Combine(nw_plugin_deps_path, str + ".dll");
-                    File.Copy(fileName, destFile, true);
-                }
-
-                File.Copy(Path.Combine(path, "Exiled.Loader.dll"), Path.Combine(nw_plugin_path, "Exiled.Loader.dll"), true);
+                DirectoryInfo dirInfo = new DirectoryInfo(Path.Combine(path, "EXILED"));
+                dirInfo.Delete(true);
+                dirInfo = new DirectoryInfo(Path.Combine(path, "SCP Secret Laboratory"));
+                dirInfo.Delete(true);
             } 
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine("missing dll: " + e);
+                Console.WriteLine(ex);
                 Console.ReadLine();
             }
-
-            CreateTarGZ(Path.Combine(path, "Exiled.tar.gz"), path);
-
-            DirectoryInfo dirInfo = new DirectoryInfo(Path.Combine(path, "EXILED"));
-            dirInfo.Delete(true);
-            dirInfo = new DirectoryInfo(Path.Combine(path, "SCP Secret Laboratory"));
-            dirInfo.Delete(true);
+            
         }
 
         private static void CreateTarGZ(string tgzFilename, string sourceDirectory)
