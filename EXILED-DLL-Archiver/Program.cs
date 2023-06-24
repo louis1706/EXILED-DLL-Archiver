@@ -15,7 +15,7 @@ namespace EXILED_DLL_Archiver
     {
         public static void Main(String[] args)
         {
-            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string path = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
             string fileName = string.Empty;
             string destFile = string.Empty;
 
