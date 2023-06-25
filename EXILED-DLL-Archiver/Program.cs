@@ -66,10 +66,12 @@ namespace EXILED_DLL_Archiver
 
                 CreateTarGZ(Path.Combine(path, "Exiled.tar.gz"), path);
 
+                /*
                 DirectoryInfo dirInfo = new DirectoryInfo(Path.Combine(path, "EXILED"));
                 dirInfo.Delete(true);
                 dirInfo = new DirectoryInfo(Path.Combine(path, "SCP Secret Laboratory"));
                 dirInfo.Delete(true);
+                */
             } 
             catch (Exception ex)
             {
