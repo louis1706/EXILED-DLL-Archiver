@@ -25,7 +25,7 @@ namespace EXILED_DLL_Archiver
             string nw_plugin_deps_path = Path.Combine(nw_plugin_path, "dependencies");
 
             List<string> plugins = new List<string> { "Exiled.CreditTags", "Exiled.CustomItems", "Exiled.CustomRoles", "Exiled.Events", "Exiled.Permissions", "Exiled.Updater" };
-            List<string> pluginsDep = new List<string> { "0Harmony", "Exiled.API", "SemanticVersioning" };
+            List<string> pluginsDep = new List<string> { "0Harmony", "Exiled.API", "SemanticVersioning", "Mono.Posix", "System.ComponentModel.DataAnnotations" };
             List<string> nwDep = new List<string> { "Exiled.API" };
 
             try
@@ -58,25 +58,21 @@ namespace EXILED_DLL_Archiver
 
                     File.Copy(Path.Combine(path, "Exiled.Loader.dll"), Path.Combine(nw_plugin_path, "Exiled.Loader.dll"), true);
                 }
-                catch (Exception e)
+                catch (FileNotFoundException e)
                 {
-                    Console.WriteLine("missing dll: " + e);
+                    Console.WriteLine("Missing dll: " + e.Message);
+                    Console.WriteLine("Mono.Posix and System.ComponentModel.DataAnnotations need to be manually added if missing");
                     Console.ReadLine();
+                    Environment.Exit(0);
                 }
 
                 CreateTarGZ(Path.Combine(path, "Exiled.tar.gz"), path);
-
-                /*
-                DirectoryInfo dirInfo = new DirectoryInfo(Path.Combine(path, "EXILED"));
-                dirInfo.Delete(true);
-                dirInfo = new DirectoryInfo(Path.Combine(path, "SCP Secret Laboratory"));
-                dirInfo.Delete(true);
-                */
             } 
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 Console.ReadLine();
+                Environment.Exit(0);
             }
             
         }
