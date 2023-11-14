@@ -25,8 +25,8 @@ namespace EXILED_DLL_Archiver
             string nw_plugin_deps_path = Path.Combine(nw_plugin_path, "dependencies");
 
             List<string> plugins = new List<string> { "Exiled.CreditTags", "Exiled.CustomItems", "Exiled.CustomRoles", "Exiled.Events", "Exiled.Permissions", };
-            List<string> pluginsDep = new List<string> { "0Harmony", "Exiled.API", "SemanticVersioning", "Mono.Posix", "System.ComponentModel.DataAnnotations" };
-            List<string> nwDep = new List<string> { "Exiled.API", "SemanticVersioning" };
+            List<string> pluginsDep = new List<string> { "0Harmony", "Exiled.API", "SemanticVersioning", "System.ComponentModel.DataAnnotations" };
+            List<string> nwDep = new List<string> { "Exiled.API", "SemanticVersioning", "Mono.Posix" };
 
             try
             {
@@ -63,7 +63,7 @@ namespace EXILED_DLL_Archiver
                     Console.WriteLine("Missing dll: " + e.Message);
                     Console.WriteLine("Mono.Posix and System.ComponentModel.DataAnnotations need to be manually added if missing");
                     Console.ReadLine();
-                    Environment.Exit(0);
+                    return;
                 }
 
                 CreateTarGZ(Path.Combine(path, "Exiled.tar.gz"), path);
@@ -72,7 +72,7 @@ namespace EXILED_DLL_Archiver
             {
                 Console.WriteLine(ex);
                 Console.ReadLine();
-                Environment.Exit(0);
+                return;
             }
             
         }
