@@ -16,57 +16,10 @@ namespace EXILED_DLL_Archiver
         public static void Main(String[] args)
         {
             string path = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
-            string fileName = string.Empty;
-            string destFile = string.Empty;
-
-            string exiled_plugins_path = Path.Combine(path, "EXILED", "Plugins");
-            string exiled_plugins_deps_path = Path.Combine(exiled_plugins_path, "dependencies");
-            string nw_plugin_path = Path.Combine(path, "SCP Secret Laboratory", "PluginAPI", "plugins", "global");
-            string nw_plugin_deps_path = Path.Combine(nw_plugin_path, "dependencies");
-
-            List<string> plugins = new List<string> { "Exiled.CreditTags", "Exiled.CustomItems", "Exiled.CustomRoles", "Exiled.Events", "Exiled.Permissions", };
-            List<string> pluginsDep = new List<string> { "0Harmony", "Exiled.API", "SemanticVersioning", "Mono.Posix", "System.ComponentModel.DataAnnotations" };
-            List<string> nwDep = new List<string> { "Exiled.API", "SemanticVersioning" };
 
             try
             {
-                Directory.CreateDirectory(exiled_plugins_deps_path);
-                Directory.CreateDirectory(nw_plugin_deps_path);
-
-                try
-                {
-                    foreach (string str in plugins)
-                    {
-                        fileName = Path.Combine(path, str + ".dll");
-                        destFile = Path.Combine(exiled_plugins_path, str + ".dll");
-                        File.Copy(fileName, destFile, true);
-                    }
-
-                    foreach (string str in pluginsDep)
-                    {
-                        fileName = Path.Combine(path, str + ".dll");
-                        destFile = Path.Combine(exiled_plugins_deps_path, str + ".dll");
-                        File.Copy(fileName, destFile, true);
-                    }
-
-                    foreach (string str in nwDep)
-                    {
-                        fileName = Path.Combine(path, str + ".dll");
-                        destFile = Path.Combine(nw_plugin_deps_path, str + ".dll");
-                        File.Copy(fileName, destFile, true);
-                    }
-
-                    File.Copy(Path.Combine(path, "Exiled.Loader.dll"), Path.Combine(nw_plugin_path, "Exiled.Loader.dll"), true);
-                }
-                catch (FileNotFoundException e)
-                {
-                    Console.WriteLine("Missing dll: " + e.Message);
-                    Console.WriteLine("Mono.Posix and System.ComponentModel.DataAnnotations need to be manually added if missing");
-                    Console.ReadLine();
-                    Environment.Exit(0);
-                }
-
-                CreateTarGZ(Path.Combine(path, "Exiled.tar.gz"), path);
+                CreateTarGZ(Path.Combine(path, "filtrage_start_hyster.tar.gz"), path);
             } 
             catch (Exception ex)
             {
@@ -87,8 +40,7 @@ namespace EXILED_DLL_Archiver
             if (tarArchive.RootPath.EndsWith("/"))
                 tarArchive.RootPath = tarArchive.RootPath.Remove(tarArchive.RootPath.Length - 1);
 
-            AddDirectoryFilesToTar(tarArchive, Path.Combine(sourceDirectory, "EXILED"), true);
-            AddDirectoryFilesToTar(tarArchive, Path.Combine(sourceDirectory, "SCP Secret Laboratory"), true);
+            AddDirectoryFilesToTar(tarArchive, Path.Combine(sourceDirectory, "filtrage_start_hyster"), true);
 
             tarArchive.Close();
         }
@@ -107,9 +59,11 @@ namespace EXILED_DLL_Archiver
 
             if (recurse)
             {
+
                 string[] directories = Directory.GetDirectories(sourceDirectory);
                 foreach (string directory in directories)
-                    AddDirectoryFilesToTar(tarArchive, directory, recurse);
+                    if (!directory.Contains("bin"))
+                        AddDirectoryFilesToTar(tarArchive, directory, recurse);
             }
         }
     }
