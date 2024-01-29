@@ -24,7 +24,7 @@ namespace EXILED_DLL_Archiver
             string nw_plugin_path = Path.Combine(path, "SCP Secret Laboratory", "PluginAPI", "plugins", "global");
             string nw_plugin_deps_path = Path.Combine(nw_plugin_path, "dependencies");
 
-            List<string> plugins = new List<string> { "Exiled.CreditTags", "Exiled.CustomItems", "Exiled.CustomRoles", "Exiled.Events", "Exiled.Permissions", };
+            List<string> plugins = new List<string> { "Exiled.CreditTags", "Exiled.CustomModules", "Exiled.Events", "Exiled.Permissions", };
             List<string> pluginsDep = new List<string> { "0Harmony", "Exiled.API", "SemanticVersioning", "System.ComponentModel.DataAnnotations" };
             List<string> nwDep = new List<string> { "Exiled.API", "SemanticVersioning", "Mono.Posix" };
 
