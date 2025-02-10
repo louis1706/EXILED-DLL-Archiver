@@ -21,8 +21,8 @@ namespace EXILED_DLL_Archiver
 
             string exiled_plugins_path = Path.Combine(path, "EXILED", "Plugins");
             string exiled_plugins_deps_path = Path.Combine(exiled_plugins_path, "dependencies");
-            string nw_plugin_path = Path.Combine(path, "SCP Secret Laboratory", "PluginAPI", "plugins", "global");
-            string nw_plugin_deps_path = Path.Combine(nw_plugin_path, "dependencies");
+            string labapi_plugin_path = Path.Combine(path, "SCP Secret Laboratory", "LabAPI-Beta", "plugins");
+            string labapi_plugin_deps_path = Path.Combine(path, "SCP Secret Laboratory", "LabAPI-Beta", "dependencies");
 
             List<string> plugins = new List<string> { "Exiled.CreditTags", "Exiled.CustomModules", "Exiled.Events", "Exiled.Permissions", };
             List<string> pluginsDep = new List<string> { "0Harmony", "Exiled.API", "SemanticVersioning", "System.ComponentModel.DataAnnotations" };
@@ -31,7 +31,7 @@ namespace EXILED_DLL_Archiver
             try
             {
                 Directory.CreateDirectory(exiled_plugins_deps_path);
-                Directory.CreateDirectory(nw_plugin_deps_path);
+                Directory.CreateDirectory(labapi_plugin_deps_path);
 
                 try
                 {
@@ -52,11 +52,11 @@ namespace EXILED_DLL_Archiver
                     foreach (string str in nwDep)
                     {
                         fileName = Path.Combine(path, str + ".dll");
-                        destFile = Path.Combine(nw_plugin_deps_path, str + ".dll");
+                        destFile = Path.Combine(labapi_plugin_deps_path, str + ".dll");
                         File.Copy(fileName, destFile, true);
                     }
 
-                    File.Copy(Path.Combine(path, "Exiled.Loader.dll"), Path.Combine(nw_plugin_path, "Exiled.Loader.dll"), true);
+                    File.Copy(Path.Combine(path, "Exiled.Loader.dll"), Path.Combine(labapi_plugin_path, "Exiled.Loader.dll"), true);
                 }
                 catch (FileNotFoundException e)
                 {
